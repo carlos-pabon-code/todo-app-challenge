@@ -1,16 +1,29 @@
 import styled from "styled-components";
-import AllTasks from "../components/AllTasks";
 import Menu from "../components/Menu";
 
-const HomeTitle = styled.h1``;
+const HomeContainer = styled.section`
+  padding: 1rem;
+  text-align: center;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+`;
+const HomeTitle = styled.h1`
+  font-family: var(--raleway);
+  font-size: 36px;
+  text-align: center;
+`;
 
 const Home = () => {
   return (
-    <>
+    <HomeContainer>
       <HomeTitle>#todo</HomeTitle>
       <Menu />
-      <AllTasks />
-    </>
+      {/* <AllTasks /> */}
+    </HomeContainer>
   );
 };
 

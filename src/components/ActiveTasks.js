@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import AddForm from "./AddForm";
 
-const AllTasksContainer = styled.section`
-  margin: 3rem auto;
+const ActiveTasksContainer = styled.section`
+  margin-top: 3rem;
 `;
 
 const NoTasksMessage = styled.p`
@@ -11,16 +11,16 @@ const NoTasksMessage = styled.p`
   color: var(--dark-color);
 `;
 
-const AllTasks = () => {
+const ActiveTasks = () => {
   const tasksList = [];
   return (
-    <AllTasksContainer>
+    <ActiveTasksContainer>
       <AddForm />
       {tasksList.length === 0 && (
-        <NoTasksMessage>No tasks added</NoTasksMessage>
+        <NoTasksMessage>No active tasks</NoTasksMessage>
       )}
-    </AllTasksContainer>
+    </ActiveTasksContainer>
   );
 };
 
-export default AllTasks;
+export default ActiveTasks;
