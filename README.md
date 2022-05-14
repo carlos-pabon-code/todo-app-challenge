@@ -25,13 +25,28 @@
 
 ## Overview
 
+First I started with cleaning all the innecesary files that were created by default using create-react-app. Then, I downloaded and imported all the resources that were needed for the challenge (fonts, colors, icons). Then, having all the base for the initialization of the challenge I continued with the development of each component required to complete the challenge.
+
+I mainly used create-react-app, styled components and react router to accomplish the challenge.
+
 ### Built With
 
-- [React.js](https://es.reactjs.org/)
+- [Create-react-app](https://create-react-app.dev/docs/getting-started)
+
+```sh
+npx create-react-app my-app
+```
+
 - [Styled components](https://styled-components.com/)
 
 ```sh
 npm install --save styled-components
+```
+
+- [React router](https://reactrouter.com/docs/en/v6)
+
+```sh
+npm install react-router-dom@6
 ```
 
 ## Features
