@@ -1,13 +1,14 @@
+import { useContext, useState } from "react";
+import TasksListContext from "../context/TasksListContext";
 import styled from "styled-components";
 
 const AddContainer = styled.section`
-  /* margin: 1rem auto; */
-  /* text-align: center; */
   text-align: left;
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
+
 const AddInput = styled.input`
   width: 100%;
   height: 56px;
@@ -20,6 +21,7 @@ const AddInput = styled.input`
     width: 100%;
   }
 `;
+
 const AddButton = styled.button`
   width: 100px;
   background-color: var(--primary-color);
@@ -31,15 +33,36 @@ const AddButton = styled.button`
   margin-left: 1rem;
   font-family: var(--montserrat);
   font-weight: 600;
+  cursor: pointer;
 `;
 
-const AddForm = () => {
+const AddTask = () => {
+  const { itemsList, setItemsList } = useContext(TasksListContext);
+
+  //useState to save the value filled on the input
+  const [addedItem, setAddedItem] = useState(null);
+
+  const handleItemChange = (e) => {
+    setAddedItem(e.target.value);
+  };
+
+  const addItem = () => {
+    setItemsList([...itemsList, { name: addedItem, state: false }]);
+  };
+
   return (
     <AddContainer>
-      <AddInput id="details" name="details" placeholder="Add details" />
-      <AddButton type="button">Add</AddButton>
+      <AddInput
+        id="details"
+        name="details"
+        placeholder="Add details"
+        onChange={handleItemChange}
+      />
+      <AddButton type="button" onClick={addItem}>
+        Add
+      </AddButton>
     </AddContainer>
   );
 };
 
-export default AddForm;
+export default AddTask;

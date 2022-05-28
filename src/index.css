@@ -6,14 +6,6 @@
   box-sizing: border-box;
 }
 
-a{
-  text-decoration: none;
-}
-
-ul{
-  list-style-type: none;
-}
-
 :root{
   /* Colors */
   --primary-color: #2F80ED;
@@ -27,3 +19,17 @@ ul{
   --raleway: 'Raleway', sans-serif;
   --montserrat : 'Montserrat', sans-serif;
 }
+
+a{
+  text-decoration: none;
+}
+
+ul{
+  list-style-type: none;
+}
+
+input[type= "checkbox"]{
+  width: 20px;
+  height: 20px;
+}
+

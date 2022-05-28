@@ -22,7 +22,6 @@ const Home = () => {
     <HomeContainer>
       <HomeTitle>#todo</HomeTitle>
       <Menu />
-      {/* <AllTasks /> */}
     </HomeContainer>
   );
 };
