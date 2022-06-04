@@ -47,7 +47,15 @@ const AddTask = () => {
   };
 
   const addItem = () => {
-    setItemsList([...itemsList, { name: addedItem, state: false }]);
+    console.log("agregar item");
+    const taskInput = document.getElementById("details");
+    let tasksList = JSON.parse(localStorage.getItem("itemsList")) || "";
+    if (tasksList === "") {
+      setItemsList([...itemsList, { name: addedItem, state: false }]);
+    } else {
+      setItemsList([...tasksList, { name: addedItem, state: false }]);
+    }
+    taskInput.value = "";
   };
 
   return (

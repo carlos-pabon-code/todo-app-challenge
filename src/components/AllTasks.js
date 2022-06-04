@@ -34,25 +34,37 @@ const ItemName = styled.span`
 const AllTasks = () => {
   const { itemsList } = useContext(TasksListContext);
 
+  console.log(itemsList);
+  let tasksList = JSON.parse(localStorage.getItem("itemsList")) || "";
+
+  if (itemsList.length > 0) {
+    localStorage.setItem("itemsList", JSON.stringify(itemsList));
+  }
+
   const handleCheckboxState = (e, index) => {
     if (e.target.checked) {
+      tasksList[index].state = true;
       itemsList[index].state = true;
+      localStorage.setItem("itemsList", JSON.stringify(tasksList));
     } else {
+      tasksList[index].state = false;
       itemsList[index].state = false;
+      localStorage.setItem("itemsList", JSON.stringify(tasksList));
     }
   };
 
   return (
     <AllTasksContainer>
       <AddTask />
-      {itemsList.length === 0 ? (
+      {tasksList.length === 0 ? (
         <NoTasksMessage>No tasks added</NoTasksMessage>
       ) : (
-        itemsList.map((item, index) => (
+        tasksList.map((item, index) => (
           <ItemsListContainer key={index}>
             <ItemCheckbox
               type="checkbox"
               onChange={(e) => handleCheckboxState(e, index)}
+              defaultChecked={item.state}
             />
             <ItemName>{item.name}</ItemName>
           </ItemsListContainer>
