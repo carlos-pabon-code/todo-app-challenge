@@ -50,7 +50,7 @@ const AddTask = () => {
     const taskInput = document.getElementById("details");
     let tasksList = JSON.parse(localStorage.getItem("itemsList")) || "";
     if (tasksList === "") {
-      setItemsList([...itemsList, { name: addedItem, state: false }]);
+      setItemsList([...tasksList, { name: addedItem, state: false }]);
     } else {
       setItemsList([...tasksList, { name: addedItem, state: false }]);
     }

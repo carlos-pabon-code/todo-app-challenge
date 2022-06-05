@@ -88,7 +88,6 @@ const CompletedTasks = () => {
 
   const handleCheckbox = (e, index) => {
     let stateList = handleCheckboxState(e.target.checked, index, tasksList);
-
     setItemsList([...stateList]);
   };
 
