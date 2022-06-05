@@ -37,7 +37,7 @@ const AddButton = styled.button`
 `;
 
 const AddTask = () => {
-  const { itemsList, setItemsList } = useContext(TasksListContext);
+  const { setItemsList } = useContext(TasksListContext);
 
   //useState to save the value filled on the input
   const [addedItem, setAddedItem] = useState(null);
@@ -49,11 +49,7 @@ const AddTask = () => {
   const addItem = () => {
     const taskInput = document.getElementById("details");
     let tasksList = JSON.parse(localStorage.getItem("itemsList")) || "";
-    if (tasksList === "") {
-      setItemsList([...tasksList, { name: addedItem, state: false }]);
-    } else {
-      setItemsList([...tasksList, { name: addedItem, state: false }]);
-    }
+    setItemsList([...tasksList, { name: addedItem, state: false }]);
     taskInput.value = "";
   };
 
