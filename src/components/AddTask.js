@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import TasksListContext from "../context/TasksListContext";
 import styled from "styled-components";
 
@@ -37,10 +37,16 @@ const AddButton = styled.button`
 `;
 
 const AddTask = () => {
-  const { setItemsList } = useContext(TasksListContext);
+  const { itemsList, setItemsList } = useContext(TasksListContext);
+
+  useEffect(() => {
+    setItemsList([...itemsList]);
+  }, [setItemsList]);
 
   //useState to save the value filled on the input
   const [addedItem, setAddedItem] = useState(null);
+
+  let tasksList = JSON.parse(localStorage.getItem("itemsList")) || "";
 
   const handleItemChange = (e) => {
     setAddedItem(e.target.value);
@@ -48,8 +54,12 @@ const AddTask = () => {
 
   const addItem = () => {
     const taskInput = document.getElementById("details");
-    let tasksList = JSON.parse(localStorage.getItem("itemsList")) || "";
-    setItemsList([...tasksList, { name: addedItem, state: false }]);
+
+    if (tasksList === "") {
+      setItemsList([...itemsList, { name: addedItem, state: false }]);
+    } else {
+      setItemsList([...tasksList, { name: addedItem, state: false }]);
+    }
     taskInput.value = "";
   };
 
