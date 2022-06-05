@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Menu from "../components/Menu";
+import Footer from "./Footer";
 
 const HomeContainer = styled.section`
   padding: 1rem;
@@ -20,8 +21,11 @@ const HomeTitle = styled.h1`
 const Home = () => {
   return (
     <HomeContainer>
-      <HomeTitle>#todo</HomeTitle>
-      <Menu />
+      <main role="main">
+        <HomeTitle>#todo</HomeTitle>
+        <Menu />
+      </main>
+      <Footer />
     </HomeContainer>
   );
 };

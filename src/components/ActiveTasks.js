@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import TasksListContext from "../context/TasksListContext";
+import { handleCheckboxState } from "../helpers/handleCheckboxState";
 import AddTask from "./AddTask";
 
 const ActiveTasksContainer = styled.section`
@@ -32,45 +33,42 @@ const ItemName = styled.span`
 `;
 
 const ActiveTasks = () => {
-  // const tasksList = [];
-  const { itemsList } = useContext(TasksListContext);
+  const { itemsList, setItemsList } = useContext(TasksListContext);
 
   let tasksList = JSON.parse(localStorage.getItem("itemsList")) || "";
+  let currentActiveTasks = 0;
+
   if (itemsList.length > 0) {
     localStorage.setItem("itemsList", JSON.stringify(itemsList));
   }
 
-  const handleCheckboxState = (e, index) => {
-    console.log(e.target.checked);
-    if (e.target.checked) {
-      tasksList[index].state = true;
-      console.log(tasksList);
-      localStorage.setItem("itemsList", JSON.stringify(tasksList));
-    } else {
-      tasksList[index].state = false;
-      localStorage.setItem("itemsList", JSON.stringify(tasksList));
-    }
+  if (tasksList.length > 0) {
+    currentActiveTasks = tasksList.filter((task) => !task.state).length;
+  }
+
+  const handleCheckbox = (e, index) => {
+    let stateList = handleCheckboxState(e.target.checked, index, tasksList);
+
+    setItemsList([...stateList]);
   };
 
   return (
     <ActiveTasksContainer>
       <AddTask />
-      {tasksList.length === 0 ? (
+      {tasksList.length === 0 || currentActiveTasks === 0 ? (
         <NoTasksMessage>No active tasks</NoTasksMessage>
       ) : (
-        tasksList.map((item, index) => {
+        tasksList.map((task, index) => {
           return (
-            !item.state && (
-              <>
-                <ItemsListContainer key={index}>
-                  <ItemCheckbox
-                    type="checkbox"
-                    onChange={(e) => handleCheckboxState(e, index)}
-                    defaultChecked={item.state}
-                  />
-                  <ItemName>{item.name}</ItemName>
-                </ItemsListContainer>
-              </>
+            !task.state && (
+              <ItemsListContainer key={index}>
+                <ItemCheckbox
+                  type="checkbox"
+                  onChange={(e) => handleCheckbox(e, index)}
+                  defaultChecked={task.state}
+                />
+                <ItemName>{task.name}</ItemName>
+              </ItemsListContainer>
             )
           );
         })

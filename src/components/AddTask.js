@@ -47,7 +47,6 @@ const AddTask = () => {
   };
 
   const addItem = () => {
-    console.log("agregar item");
     const taskInput = document.getElementById("details");
     let tasksList = JSON.parse(localStorage.getItem("itemsList")) || "";
     if (tasksList === "") {

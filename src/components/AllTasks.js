@@ -1,6 +1,8 @@
 import { useContext } from "react";
 import styled from "styled-components";
+import { css } from "styled-components";
 import TasksListContext from "../context/TasksListContext";
+import { handleCheckboxState } from "../helpers/handleCheckboxState";
 import AddTask from "./AddTask";
 
 const AllTasksContainer = styled.section`
@@ -29,28 +31,26 @@ const ItemName = styled.span`
   font-family: var(--montserrat);
   font-weight: 500;
   color: var(--dark-color);
+  ${({ state }) =>
+    state &&
+    css`
+      text-decoration: line-through;
+    `}
 `;
 
 const AllTasks = () => {
-  const { itemsList } = useContext(TasksListContext);
+  const { itemsList, setItemsList } = useContext(TasksListContext);
 
-  console.log(itemsList);
   let tasksList = JSON.parse(localStorage.getItem("itemsList")) || "";
 
   if (itemsList.length > 0) {
     localStorage.setItem("itemsList", JSON.stringify(itemsList));
   }
 
-  const handleCheckboxState = (e, index) => {
-    if (e.target.checked) {
-      tasksList[index].state = true;
-      itemsList[index].state = true;
-      localStorage.setItem("itemsList", JSON.stringify(tasksList));
-    } else {
-      tasksList[index].state = false;
-      itemsList[index].state = false;
-      localStorage.setItem("itemsList", JSON.stringify(tasksList));
-    }
+  const handleCheckbox = (e, index) => {
+    let stateList = handleCheckboxState(e.target.checked, index, tasksList);
+
+    setItemsList([...stateList]);
   };
 
   return (
@@ -63,10 +63,10 @@ const AllTasks = () => {
           <ItemsListContainer key={index}>
             <ItemCheckbox
               type="checkbox"
-              onChange={(e) => handleCheckboxState(e, index)}
+              onChange={(e) => handleCheckbox(e, index)}
               defaultChecked={item.state}
             />
-            <ItemName>{item.name}</ItemName>
+            <ItemName state={item.state}>{item.name}</ItemName>
           </ItemsListContainer>
         ))
       )}
