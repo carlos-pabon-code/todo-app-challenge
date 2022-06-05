@@ -56,7 +56,7 @@ const AddTask = () => {
   const addItem = () => {
     const taskInput = document.getElementById("details");
 
-    if (tasksList === "") {
+    if (tasksList.length === 0) {
       setItemsList([...itemsList, { name: addedItem, state: false }]);
     } else {
       setItemsList([...tasksList, { name: addedItem, state: false }]);
