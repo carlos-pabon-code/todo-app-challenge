@@ -93,16 +93,15 @@ const CompletedTasks = () => {
   };
 
   const deleteTask = (index) => {
-    console.log(index);
-    console.log(tasksList);
     tasksList.splice(index, 1);
     localStorage.setItem("itemsList", JSON.stringify(tasksList));
     setItemsList([...tasksList]);
   };
 
   const clearAllTasks = () => {
-    localStorage.clear();
-    setItemsList([]);
+    let currentActiveTasks = tasksList.filter((task) => !task.state);
+    localStorage.setItem("itemsList", JSON.stringify(currentActiveTasks));
+    setItemsList([...currentActiveTasks]);
   };
 
   return (
