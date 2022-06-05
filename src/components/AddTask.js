@@ -42,7 +42,7 @@ const AddTask = () => {
   useEffect(() => {
     setItemsList([...itemsList]);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setItemsList]);
+  }, [itemsList.name, itemsList.state]);
 
   //useState to save the value filled on the input
   const [addedItem, setAddedItem] = useState(null);
