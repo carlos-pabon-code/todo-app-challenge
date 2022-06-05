@@ -39,15 +39,16 @@ const AddButton = styled.button`
 const AddTask = () => {
   const { itemsList, setItemsList } = useContext(TasksListContext);
 
-  useEffect(() => {
-    setItemsList([...itemsList]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [itemsList.name, itemsList.state]);
-
   //useState to save the value filled on the input
   const [addedItem, setAddedItem] = useState(null);
 
   let tasksList = JSON.parse(localStorage.getItem("itemsList")) || "";
+
+  useEffect(() => {
+    console.log("change");
+    setItemsList([...itemsList]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [itemsList.length]);
 
   const handleItemChange = (e) => {
     setAddedItem(e.target.value);
